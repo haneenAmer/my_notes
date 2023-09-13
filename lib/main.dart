@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:my_notes/Screens/home_screen.dart';
 import 'package:my_notes/Screens/login_screen.dart';
 import 'package:my_notes/Screens/sign_in_screen.dart';
-import 'firebase_options.dart';
 
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
+/// beacause therr are many log function so this line will make this log function is the only function available in devtools
 
-//   await Firebase.initializeApp();
-//   runApp(const MyApp());
-// }
 void main() async {
   /// do the authintication befor anything else
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +14,7 @@ void main() async {
   }).catchError((error) {
     print("Firebase initialization error: $error");
   });
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -32,6 +27,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    return MaterialApp(routes: {
+      '/signin': (context) => const SignInScreen(),
+      '/login': (context) => const LoginScreen(),
+    }, debugShowCheckedModeBanner: false, home: const HomeScreen());
   }
 }
